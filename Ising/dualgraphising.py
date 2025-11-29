@@ -98,7 +98,7 @@ class DualGraphIsing:
                                       interval=interval, blit=False)
 
         # Sauvegarde en GIF (avec PillowWriter)
-        writer = animation.PillowWriter(fps=1000/interval)
+        writer = animation.PillowWriter(fps=1000//interval)
         ani.save(gif_path, writer=writer, dpi=dpi)
         plt.close(fig)
         print(f"Animation sauvegardée sous : {gif_path}")

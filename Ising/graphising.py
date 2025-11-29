@@ -70,7 +70,7 @@ class GraphIsing:
         def do_mc_cycle(n):
             # Perform N Metropolis steps per cycle
             for _ in range(self.size):
-                self.metropolis_step()
+                self.move()
 
             # Update node colors
             new_colors = ['red' if self.spins[n]==1 else 'black' for n in self.G.nodes]
