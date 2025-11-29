@@ -1,0 +1,24 @@
+[project]
+name = "ising-sim"
+version = "0.1.0"
+description = "A Python library implementing various Ising model simulations."
+authors = [
+    { name = "Dev0110", email = "mail@mail.com" }
+]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.8"
+
+dependencies = [
+    "numpy",
+    "matplotlib",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/j0110/Ising"
+"Repository" = "https://github.com/j0110/Ising"
+"Issues" = "https://github.com/j0110/Ising/issues"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
