@@ -11,7 +11,7 @@ class GraphIsing:
         self.G = G
         self.size = G.number_of_nodes()
         self.dim = 1
-        self.length_cycle = self.size  # one MC cycle = N updates
+        self.length_cycle = self.size # one MC cycle = N updates
         self.J = J
         self.beta = 1.0 / T
         self.spins = {node: np.random.choice([-1, 1]) for node in G.nodes}
@@ -19,6 +19,8 @@ class GraphIsing:
             influencer_nodes = get_members_of_association(student_graph, influent_association) if influent_association else None
             self.influencer_nodes = set(influencer_nodes) if influencer_nodes else set()  # nœuds bloqués
             self.spins = {node: (1 if node in influencer_nodes else -1) for node in G.nodes}
+        else:
+            self.influencer_nodes = set()
         self.energy = self._get_energy()
         self.magnetization = self._get_magnetization()
 
