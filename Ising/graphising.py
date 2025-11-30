@@ -19,17 +19,17 @@ class GraphIsing:
             influencer_nodes = get_members_of_association(student_graph, influent_association) if influent_association else None
             self.influencer_nodes = set(influencer_nodes) if influencer_nodes else set()  # nœuds bloqués
             self.spins = {node: (1 if node in influencer_nodes else -1) for node in G.nodes}
-        self.energy = self.compute_energy()
-        self.magnetization = self.compute_magnetization()
+        self.energy = self._get_energy()
+        self.magnetization = self._get_magnetization()
 
 
-    def compute_energy(self):
+    def _get_energy(self):
         E = 0.0
         for i, j in self.G.edges:
             E += -self.J * self.spins[i] * self.spins[j]
         return E
 
-    def compute_magnetization(self):
+    def _get_magnetization(self):
         return sum(self.spins.values())
 
     def move(self):
