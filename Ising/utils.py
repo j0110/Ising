@@ -23,14 +23,14 @@ def compute_properties(model, var_name, var_value, n_warmup=1000, n_cycles=100, 
             model.h = var
         else:
             raise ValueError("var_name must be 'T' or 'h'")
-        model.energy = model._get_energy()
-        model.magnetization = model._get_magnetization()
         av_m, av_m2, av_e, av_e2 = 0, 0, 0, 0
         
         for _ in range(n_average):
             # --- Warm-up phase ---
             if reset_state:
-                model.spins = np.random.choice([-1,1], size=tuple([model.size]*model.dim))
+                model._reset_spin()
+                model.energy = model._get_energy()
+                model.magnetization = model._get_magnetization()
 
             for _ in range(n_warmup * model.length_cycle):
                 model.move()

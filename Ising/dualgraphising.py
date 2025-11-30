@@ -15,12 +15,24 @@ class DualGraphIsing:
         self.J_A = J_A
         self.J_B = J_B
         self.C = C
+        self._reset_spin()
 
-        # Spins initiaux aléatoires pour chaque couche
-        self.spins_A = {node: np.random.choice([-1, 1]) for node in G.nodes}
-        self.spins_B = {node: np.random.choice([-1, 1]) for node in G.nodes}
+    def _reset_spin(self):
+        """Réinitialise les spins des deux couches."""
+        self.spins_A = {node: np.random.choice([-1, 1]) for node in self.G.nodes}
+        self.spins_B = {node: np.random.choice([-1, 1]) for node in self.G.nodes}   
 
-    def compute_magnetization(self, spins):
+    def _get_energy(self):
+        """Énergie totale des deux couches avec couplage inter-couche."""
+        E_A, E_B, E_C = 0.0, 0.0, 0.0
+        for i, j in self.G.edges:
+            E_A += -self.J_A * self.spins_A[i] * self.spins_A[j]
+            E_B += -self.J_B * self.spins_B[i] * self.spins_B[j]
+        for node in self.G.nodes:
+            E_C += -self.C * self.spins_A[node] * self.spins_B[node]
+        return E_A + E_B + E_C
+
+    def _get_magnetization(self, spins):
         """Magnétisation normalisée d'une couche."""
         return sum(spins.values()) / self.size
 
@@ -85,8 +97,8 @@ class DualGraphIsing:
             axB.set_title("Décision B")
 
             # Magnétisations
-            mA = self.compute_magnetization(self.spins_A)
-            mB = self.compute_magnetization(self.spins_B)
+            mA = self._get_magnetization(self.spins_A)
+            mB = self._get_magnetization(self.spins_B)
             magsA.append(mA); magsB.append(mB); steps.append(frame)
             axM.plot(steps, magsA, 'r-')
             axM.plot(steps, magsB, 'b-')

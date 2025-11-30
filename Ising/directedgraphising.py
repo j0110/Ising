@@ -14,18 +14,22 @@ class DirectedGraphIsing:
         self.J = J
         self.beta = 1.0 / T
         # Initialize spins randomly
-        self.spins = {node: np.random.choice([-1, 1]) for node in G.nodes}
-        self.energy = self.compute_energy()
-        self.magnetization = self.compute_magnetization()
+        self._reset_spin()
+        self.energy = self._get_energy()
+        self.magnetization = self._get_magnetization()
 
-    def compute_energy(self):
+    def _reset_spin(self):
+        """Reset spins randomly."""
+        self.spins = {node: np.random.choice([-1, 1]) for node in self.G.nodes}
+    
+    def _get_energy(self):
         """Compute energy for a directed graph: sum over all directed edges."""
         E = 0.0
         for i, j in self.G.edges:  # edge from i -> j
             E += -self.J * self.spins[i] * self.spins[j]
         return E
 
-    def compute_magnetization(self):
+    def _get_magnetization(self):
         return sum(self.spins.values())
 
     def metropolis_step(self):

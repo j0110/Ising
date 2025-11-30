@@ -11,7 +11,7 @@ class NormalIsing:
         self.J = J
         self.beta = 1./T
         self.h = h
-        self.spins = np.random.choice([-1,1], size=tuple([self.size]*self.dim))      # either +1 or -1
+        self._reset_spin()
         self.energy = self._get_energy()
         self.magnetization = self._get_magnetization()
         self.mode = mode
@@ -23,6 +23,10 @@ class NormalIsing:
             self.move = self.wolff_move
             self.length_cycle = 1
 
+    def _reset_spin(self):
+        """Reset spins randomly."""
+        self.spins = np.random.choice([-1,1], size=tuple([self.size]*self.dim))
+    
     def _get_neighbors(self, idx, only_forward=False):
         neighbors = []
         for d in range(self.dim):
