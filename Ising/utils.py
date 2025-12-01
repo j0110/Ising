@@ -77,10 +77,10 @@ def plot_properties(var_name, results, save_path="thermal_properties.png"):
     x_axis = results[var_name]
 
     plt.figure(figsize=(8, 6))
-    plt.plot(x_axis, [elem for elem in results['M']], 'o', label='<|M|>')
-    plt.plot(x_axis, [elem for elem in results['E']], 'o', label='<E>')
-    plt.plot(x_axis, [elem/1000 for elem in results['chi']], 's', label='χ (susceptibility)')
-    plt.plot(x_axis, [elem for elem in results['C']], '^', label='C (specific heat)')
+    plt.plot(x_axis, [elem/np.max(results['M']) for elem in results['M']], 'o', label='<|M|>')
+    plt.plot(x_axis, [elem/np.max(results['E']) for elem in results['E']], 'o', label='<E>')
+    plt.plot(x_axis, [elem/np.max(results['chi']) for elem in results['chi']], 's', label='χ (susceptibility)')
+    plt.plot(x_axis, [elem/np.max(results['C']) for elem in results['C']], '^', label='C (specific heat)')
 
     plt.xlabel('Temperature (T)' if var_name == 'T' else 'Magnetic field (h)')
     plt.ylabel('Arbitrary scale')
