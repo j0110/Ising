@@ -25,9 +25,12 @@ class GraphIsing:
         self.magnetization = self._get_magnetization()
 
 
-    def _reset_spin(self):
+    def _reset_spin(self, to_value=None):
         """Réinitialise les spins."""
-        self.spins = {node: np.random.choice([-1, 1]) for node in self.G.nodes}
+        if to_value is not None:
+            self.spins = {node: to_value for node in self.G.nodes}
+        else:
+            self.spins = {node: np.random.choice([-1, 1]) for node in self.G.nodes}
 
     def _get_energy(self):
         E = 0.0

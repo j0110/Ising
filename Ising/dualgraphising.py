@@ -17,10 +17,14 @@ class DualGraphIsing:
         self.C = C
         self._reset_spin()
 
-    def _reset_spin(self):
+    def _reset_spin(self, to_value=None):
         """Réinitialise les spins des deux couches."""
-        self.spins_A = {node: np.random.choice([-1, 1]) for node in self.G.nodes}
-        self.spins_B = {node: np.random.choice([-1, 1]) for node in self.G.nodes}   
+        if to_value is not None:
+            self.spins_A = {node: to_value for node in self.G.nodes}
+            self.spins_B = {node: to_value for node in self.G.nodes}
+        else:
+            self.spins_A = {node: np.random.choice([-1, 1]) for node in self.G.nodes}
+            self.spins_B = {node: np.random.choice([-1, 1]) for node in self.G.nodes}   
 
     def _get_energy(self):
         """Énergie totale des deux couches avec couplage inter-couche."""

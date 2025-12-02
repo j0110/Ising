@@ -23,9 +23,12 @@ class NormalIsing:
             self.move = self.wolff_move
             self.length_cycle = 1
 
-    def _reset_spin(self):
-        """Reset spins randomly."""
-        self.spins = np.random.choice([-1,1], size=tuple([self.size]*self.dim))
+    def _reset_spin(self, to_value=None):
+        """Réinitialise les spins."""
+        if to_value is not None:
+            self.spins = to_value*np.ones(shape=tuple([self.size]*self.dim))
+        else:
+            self.spins = np.random.choice([-1,1], size=tuple([self.size]*self.dim))
     
     def _get_neighbors(self, idx, only_forward=False):
         neighbors = []
