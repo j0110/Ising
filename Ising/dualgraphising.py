@@ -42,7 +42,7 @@ class DualGraphIsing:
         """Magnétisation normalisée d'une couche."""
         return sum(spins.values()) / self.size
 
-    def metropolis_step(self):
+    def move(self):
         """Metropolis simple sur les deux couches avec couplage inter-couche."""
         for layer in ['A', 'B']:
             spins = self.spins_A if layer == 'A' else self.spins_B
@@ -78,7 +78,7 @@ class DualGraphIsing:
 
         def update(frame):
             for _ in range(frames_per_cycle * self.size):
-                self.metropolis_step()
+                self.move()
 
             axA.clear(); axB.clear(); axM.clear()
             axA.axis('off'); axB.axis('off')

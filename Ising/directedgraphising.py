@@ -37,7 +37,7 @@ class DirectedGraphIsing:
     def _get_magnetization(self):
         return sum(self.spins.values())
 
-    def metropolis_step(self):
+    def move(self):
         """Perform a single Metropolis update considering incoming neighbors."""
         node = np.random.choice(list(self.G.nodes))
         s = self.spins[node]
@@ -76,7 +76,7 @@ class DirectedGraphIsing:
 
         def do_mc_cycle(n):
             for _ in range(self.size):
-                self.metropolis_step()
+                self.move()
             # Update node colors
             new_colors = ['red' if self.spins[n]==1 else 'black' for n in self.G.nodes]
             nodes.set_facecolor(new_colors)
