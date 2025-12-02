@@ -177,14 +177,14 @@ def iterations_to_treshold(class_model, var_name, var_values, kargs, iter_per_va
             model = class_model(**all_args)
             if var_name == 'h':
                 model._reset_spin(to_value=-1)
-            threshold_reached = False
+            #threshold_reached = False
             inv_size = 1.0 / model.size
             for step in range(max_step):
                 model.move()
                 m = model.magnetization * inv_size
                 if m > treshold:
-                    threshold_reached = True
+                    #threshold_reached = True
                     break
-            if threshold_reached:
-                results[var].append(step)
+            #if threshold_reached:
+            results[var].append(step)
     return results
