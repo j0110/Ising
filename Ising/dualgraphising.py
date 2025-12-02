@@ -15,6 +15,7 @@ class DualGraphIsing:
         self.J_A = J_A
         self.J_B = J_B
         self.C = C
+        self.dim = 1  # Not used but kept for consistency
         self._reset_spin()
 
     def _reset_spin(self, to_value=None):

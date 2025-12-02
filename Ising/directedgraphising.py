@@ -13,6 +13,7 @@ class DirectedGraphIsing:
         self.size = G.number_of_nodes()
         self.J = J
         self.beta = 1.0 / T
+        self.dim = 1  # Not used but kept for consistency
         # Initialize spins randomly
         self._reset_spin()
 
