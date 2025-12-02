@@ -139,13 +139,13 @@ def compute_critical_exponents(results, Tc_guess):
     Tc_fit_M, beta_fit, A_M = popt_M
 
     # --- Fit susceptibility around Tc ---
-    mask_chi = (T > Tc_guess - 0.5) & (T < Tc_guess + 0.5)
+    mask_chi = (T > 0.9*Tc_guess) & (T < 1.1*Tc_guess)
     popt_chi, _ = curve_fit(chi_law, T[mask_chi], chi[mask_chi],
                             p0=[Tc_guess, 1.75, 1.0], maxfev=5000)
     Tc_fit_chi, gamma_fit, A_chi = popt_chi
 
     # --- Fit specific heat around Tc ---
-    mask_C = (T > Tc_guess - 0.5) & (T < Tc_guess + 0.5)
+    mask_C = (T > 0.9*Tc_guess) & (T < 1.1*Tc_guess)
     popt_C, _ = curve_fit(C_law, T[mask_C], C[mask_C],
                            p0=[Tc_guess, 0.0, 1.0], maxfev=5000)
     Tc_fit_C, alpha_fit, A_C = popt_C
