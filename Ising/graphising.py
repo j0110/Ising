@@ -55,7 +55,7 @@ class GraphIsing:
             self.energy += delta_E
             self.magnetization += 2 * self.spins[node]
 
-    def run_animation(self, nt=200, interval=50):
+    def run_animation(self, nt=200, interval=50, save_path="graph_animation.gif"):
         """Animate the Ising model with magnetization plot like in 2D case."""
         steps, magnet = [], []
         pos = nx.spring_layout(self.G, seed=42)
@@ -100,6 +100,6 @@ class GraphIsing:
             line.set_data(range(len(magnet)), magnet)
             return nodes, line
 
-        self.anim = animation.FuncAnimation(fig, do_mc_cycle, frames=nt,
-                                            interval=interval, blit=False, cache_frame_data=False)
-        plt.show()
+        self.anim = animation.FuncAnimation(fig, do_mc_cycle, frames=nt, interval=interval, blit=False)
+        writer = animation.PillowWriter(fps=1000//interval)
+        self.anim.save(save_path, writer=writer)

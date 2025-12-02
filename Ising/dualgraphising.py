@@ -54,8 +54,7 @@ class DualGraphIsing:
             if delta_E <= 0 or np.random.rand() < np.exp(-self.beta * delta_E):
                 spins[node] *= -1
 
-    def make_animation(self, nt=200, frames_per_cycle=1, gif_path="dual_ising.gif",
-                       interval=100, dpi=100):
+    def make_animation(self, nt=200, frames_per_cycle=1, save_path="dual_ising.gif", interval=100):
         """
         Génère et sauvegarde une animation GIF du modèle.
         - nt : nombre de frames
@@ -110,11 +109,6 @@ class DualGraphIsing:
             axM.set_xlim(0, nt)
             return []
 
-        ani = animation.FuncAnimation(fig, update, frames=nt,
-                                      interval=interval, blit=False)
-
-        # Sauvegarde en GIF (avec PillowWriter)
+        anim = animation.FuncAnimation(fig, update, frames=nt, interval=interval, blit=False)
         writer = animation.PillowWriter(fps=1000//interval)
-        ani.save(gif_path, writer=writer, dpi=dpi)
-        plt.close(fig)
-        print(f"Animation sauvegardée sous : {gif_path}")
+        anim.save(save_path, writer=writer)
