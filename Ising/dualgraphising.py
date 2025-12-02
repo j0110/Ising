@@ -38,8 +38,10 @@ class DualGraphIsing:
             E_C += -self.C * self.spins_A[node] * self.spins_B[node]
         return E_A + E_B + E_C
 
-    def _get_magnetization(self, spins):
+    def _get_magnetization(self, spins=None):
         """Magnétisation normalisée d'une couche."""
+        if spins is None:
+            spins = self.spins_A
         return sum(spins.values()) / self.size
 
     def move(self):
