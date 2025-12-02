@@ -10,8 +10,9 @@ from pathlib import Path
 
 
 class CacheObject:
-    def __init__(self, is_cache: bool):
+    def __init__(self, is_cache: bool, path):
         self.is_cache = is_cache
+        self.path = path
 
 
 class GifCache:
@@ -22,7 +23,7 @@ class GifCache:
 
     def _load(self):
         # If file is here → GIF already cached
-        return CacheObject(is_cache=self.path.exists())
+        return CacheObject(is_cache=self.path.exists(), self.path)
 
     def _save(self):
         # Saving happens implicitly: if GIF wasn’t in cache, user code creates it.
