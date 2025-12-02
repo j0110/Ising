@@ -45,7 +45,7 @@ def compute_properties(model, var_name, var_value, n_warmup=1000, n_cycles=100, 
                 # Accumulate averages
                 m = model._get_magnetization()
                 e = model._get_energy()
-                av_m += m
+                av_m += np.abs(m)
                 av_m2 += m**2
                 av_e += e
                 av_e2 += e**2
@@ -64,7 +64,7 @@ def compute_properties(model, var_name, var_value, n_warmup=1000, n_cycles=100, 
         if var_name=="h":
             results['M'].append(fact * av_m)
         elif var_name=="T":
-            results['M'].append(fact * np.abs(av_m))
+            results['M'].append(fact * av_m)
         results['E'].append(fact * av_e)
         results['C'].append((fact * (av_e2 - av_e**2) / (k_B * T**2)))
         results['chi'].append(fact * (av_m2 - av_m**2) / (k_B * T))

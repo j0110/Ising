@@ -9,6 +9,7 @@ from .utils import (compute_properties,
                     get_members_of_association,
                     iterations_to_treshold)
 from .cachefile import CacheFile
+from .gifcache import GifCache  
 
 __all__ = [
     "NormalIsing",
@@ -21,5 +22,6 @@ __all__ = [
     "compute_critical_exponents",
     "get_members_of_association",
     "iterations_to_treshold",
-    "CacheFile"
+    "CacheFile",
+    "GifCache"
 ]

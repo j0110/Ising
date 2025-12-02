@@ -12,8 +12,6 @@ class NormalIsing:
         self.beta = 1./T
         self.h = h
         self._reset_spin()
-        self.energy = self._get_energy()
-        self.magnetization = self._get_magnetization()
         self.mode = mode
         self.epsilon = epsilon
         if not wolff:
@@ -29,6 +27,8 @@ class NormalIsing:
             self.spins = to_value*np.ones(shape=tuple([self.size]*self.dim))
         else:
             self.spins = np.random.choice([-1,1], size=tuple([self.size]*self.dim))
+        self.energy = self._get_energy()
+        self.magnetization = self._get_magnetization()
     
     def _get_neighbors(self, idx, only_forward=False):
         neighbors = []
