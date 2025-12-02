@@ -23,7 +23,7 @@ class GifCache:
 
     def _load(self):
         # If file is here → GIF already cached
-        return CacheObject(is_cache=self.path.exists(), self.path)
+        return CacheObject(is_cache=self.path.exists(), path=self.path)
 
     def _save(self):
         # Saving happens implicitly: if GIF wasn’t in cache, user code creates it.
