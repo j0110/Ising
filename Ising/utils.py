@@ -185,6 +185,5 @@ def iterations_to_treshold(class_model, var_name, var_values, kargs, iter_per_va
                 if m > treshold:
                     #threshold_reached = True
                     break
-            #if threshold_reached:
             results[var].append(step)
     return results
