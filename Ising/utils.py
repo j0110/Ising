@@ -171,7 +171,7 @@ def get_members_of_association(studentgraph, association):
 def iterations_to_treshold(class_model, var_name, var_values, kargs, iter_per_value, max_step, treshold):
     results = {}
     for var in tqdm(var_values, desc=f"Progress over {var_name}"):
-        threshold = np.pi / (var*L)**2
+        #threshold = np.pi / (var*L)**2
         results[var] = []
         all_args = {**{var_name: var}, **kargs}
         for _ in tqdm(range(iter_per_value), desc=f"  Iterations for {var_name}={var}", leave=False):
