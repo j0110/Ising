@@ -175,6 +175,7 @@ def iterations_to_treshold(class_model, var_name, var_values, kargs, iter_per_va
         all_args = {**{var_name: var}, **kargs}
         for _ in tqdm(range(iter_per_value), desc=f"  Iterations for {var_name}={var}", leave=False):
             model = class_model(**all_args)
+            model.spins = -np.ones(shape=tuple([config.size]*config.dim))
             threshold_reached = False
             inv_size = 1.0 / model.size
             for step in range(max_step):
