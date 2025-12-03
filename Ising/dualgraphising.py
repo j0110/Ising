@@ -5,8 +5,8 @@ import matplotlib.animation as animation
 
 class DualGraphIsing:
     """
-    Modèle d'Ising à deux couches (A et B) sur le même graphe,
-    avec un couplage inter-couche C.
+    Two-layer Ising model (A and B) on the same graph,
+    with interlayer coupling C.
     """
     def __init__(self, G, T=2.0, J_A=1.0, J_B=1.0, C=0.2):
         self.G = G
@@ -29,7 +29,7 @@ class DualGraphIsing:
             self.spins_B = {node: np.random.choice([-1, 1]) for node in self.G.nodes}   
 
     def _get_energy(self):
-        """Énergie totale des deux couches avec couplage inter-couche."""
+        """Total energy of the two layers with interlayer coupling."""
         E_A, E_B, E_C = 0.0, 0.0, 0.0
         for i, j in self.G.edges:
             E_A += -self.J_A * self.spins_A[i] * self.spins_A[j]
@@ -39,13 +39,13 @@ class DualGraphIsing:
         return E_A + E_B + E_C
 
     def _get_magnetization(self, spins=None):
-        """Magnétisation normalisée d'une couche."""
+        """Normalized magnetization of a layer."""
         if spins is None:
             spins = self.spins_A
         return sum(spins.values()) / self.size
 
     def move(self):
-        """Metropolis simple sur les deux couches avec couplage inter-couche."""
+        """Simple metropolis on both layers with inter-layer coupling."""
         for layer in ['A', 'B']:
             spins = self.spins_A if layer == 'A' else self.spins_B
             other = self.spins_B if layer == 'A' else self.spins_A
@@ -60,10 +60,10 @@ class DualGraphIsing:
 
     def make_animation(self, nt=200, frames_per_cycle=1, save_path="dual_ising.gif", interval=100):
         """
-        Génère et sauvegarde une animation GIF du modèle.
-        - nt : nombre de frames
-        - frames_per_cycle : combien de pas Monte Carlo par frame
-        - gif_path : nom du fichier GIF à sauvegarder
+        Generates and saves a GIF animation of the model.
+        - nt: number of frames
+        - frames_per_cycle: how many Monte Carlo steps per frame
+        - gif_path: name of the GIF file to save
         """
         pos = nx.spring_layout(self.G, seed=42)
         fig, axes = plt.subplots(1, 3, figsize=(12, 4))
