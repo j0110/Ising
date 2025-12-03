@@ -63,16 +63,16 @@ class NormalIsing:
         neighbors = self._get_neighbors(idx)
         total_neighbor = sum(neighbors)
         if self.mode == 'normal':
-            # Ising classique
+            # classical Ising
             delta_energy = 2 * self.J * spin * total_neighbor + 2 * self.h * spin
             prob_flip = np.exp(-self.beta * delta_energy)
         elif self.mode == 'self_identity':
-            if spin * total_neighbor >= 0:  # majorité comme lui
-                # Ising classique
+            if spin * total_neighbor >= 0:  # majority like him
+                # classical Ising
                 delta_energy = 2 * self.J * spin * total_neighbor + 2 * self.h * spin
                 prob_flip = np.exp(-self.beta * delta_energy)
-            else:  # majorité différente
-                delta_energy = 0  # énergie ignorée dans ce cas
+            else:  # majority different
+                delta_energy = 0  # energy ignored in this case
                 prob_flip = 1 - self.epsilon
         if np.random.random() < prob_flip:
             self.spins[idx] *= -1
