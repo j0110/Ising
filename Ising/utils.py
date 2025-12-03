@@ -103,10 +103,8 @@ def compute_critical_exponents(results, Tc_guess):
 
     Parameters
     ----------
-    results : dict
-        Dictionary with keys 'T', 'M', 'chi', 'C' from compute_thermal_properties or compute_thermal_properties_average.
-    Tc_guess : float
-        Initial estimate of the critical temperature.
+    results : dict with keys 'T', 'M', 'chi', 'C'
+    Tc_guess : float that estimate of the critical temperature.
 
     Returns
     -------
