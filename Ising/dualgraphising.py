@@ -70,7 +70,7 @@ class DualGraphIsing:
         axA, axB, axM = axes
         axA.axis('off'); axB.axis('off')
         axM.set_xlabel("Frames")
-        axM.set_ylabel("Magnétisation")
+        axM.set_ylabel("Magnetisation")
         axM.set_ylim(-1, 1)
         lineA, = axM.plot([], [], 'r-', label='A')
         lineB, = axM.plot([], [], 'b-', label='B')
@@ -84,32 +84,32 @@ class DualGraphIsing:
 
             axA.clear(); axB.clear(); axM.clear()
             axA.axis('off'); axB.axis('off')
-            axM.set_xlabel("Frames"); axM.set_ylabel("Magnétisation")
+            axM.set_xlabel("Frames"); axM.set_ylabel("Magnetisation")
             axM.set_ylim(-1, 1)
 
-            # Couche A
+            # Layer A
             nx.draw_networkx_edges(self.G, pos, ax=axA)
             nx.draw_networkx_nodes(
                 self.G, pos,
                 node_color=['red' if self.spins_A[n]==1 else 'black' for n in self.G.nodes],
                 node_size=120, ax=axA)
-            axA.set_title("Décision A")
+            axA.set_title("Decision A")
 
-            # Couche B
+            # Layer B
             nx.draw_networkx_edges(self.G, pos, ax=axB)
             nx.draw_networkx_nodes(
                 self.G, pos,
                 node_color=['blue' if self.spins_B[n]==1 else 'black' for n in self.G.nodes],
                 node_size=120, ax=axB)
-            axB.set_title("Décision B")
+            axB.set_title("Decision B")
 
-            # Magnétisations
+            # Magnetisations
             mA = self._get_magnetization(self.spins_A)
             mB = self._get_magnetization(self.spins_B)
             magsA.append(mA); magsB.append(mB); steps.append(frame)
             axM.plot(steps, magsA, 'r-')
             axM.plot(steps, magsB, 'b-')
-            axM.set_title("Magnétisations (A rouge, B bleu)")
+            axM.set_title("Magnetisations (A red, B blue)")
             axM.set_xlim(0, nt)
             return []
 
