@@ -1,6 +1,5 @@
 """
 cachefile.py
-
 JSON caching context manager with automatic NumPy array handling.
 """
 
@@ -13,7 +12,6 @@ import numpy as np
 # ------------------------------
 # Serialization helpers
 # ------------------------------
-
 def to_jsonable(obj):
     """Convert NumPy arrays recursively into JSON-serializable lists."""
     if isinstance(obj, np.ndarray):
@@ -35,7 +33,6 @@ def from_jsonable(obj):
 # ------------------------------
 # Cache classes
 # ------------------------------
-
 class CacheObject:
     def __init__(self, is_cache: bool, value=None):
         self.is_cache = is_cache
@@ -44,16 +41,15 @@ class CacheObject:
 
 class CacheFile:
     """JSON-only caching with NumPy array support."""
+    
     def __init__(self, path):
         self.path = Path(path)
 
     def _load(self):
         if not self.path.exists():
             return CacheObject(is_cache=False)
-
         with open(self.path, "r") as f:
             data = json.load(f)
-
         return CacheObject(is_cache=True, value=from_jsonable(data))
 
     def _save(self, obj: CacheObject):
@@ -61,9 +57,7 @@ class CacheFile:
             raise ValueError(
                 f"CacheFile: No value stored in cache block for file {self.path}"
             )
-
         self.path.parent.mkdir(parents=True, exist_ok=True)
-
         with open(self.path, "w") as f:
             json.dump(to_jsonable(obj.value), f)
 
