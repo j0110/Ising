@@ -6,7 +6,7 @@ from collections import defaultdict
 class StudentGraph:
     def __init__(self, fichier, associations_a_garder=None):
         """
-        Initialise la classe avec le fichier CSV et les associations à garder.
+        Initializes the class with the CSV file and the associations to keep.
         """
         self.fichier = fichier
         self.df = pd.read_csv(fichier)
@@ -29,30 +29,30 @@ class StudentGraph:
 
     def build_graph(self):
         """
-        Construit le graphe NetworkX à partir du dataframe.
+        Builds the NetworkX graph from the dataframe.
         """
-        # Ajouter les nœuds
+        # Add nodes
         for _, row in self.df.iterrows():
             self.G.add_node(row[self.nom_colonne_eleve])
 
-        # Dictionnaire association -> membres
+        # Association dictionary -> members
         asso_to_members = defaultdict(list)
         for _, row in self.df.iterrows():
             for asso in row["liste_assos"]:
                 if asso in self.associations_a_garder:
                     asso_to_members[asso].append(row[self.nom_colonne_eleve])
 
-        # Créer les liens uniquement pour les associations choisies
+        # Create links only for selected associations
         for asso, membres in asso_to_members.items():
             for i in range(len(membres)):
                 for j in range(i + 1, len(membres)):
                     self.G.add_edge(membres[i], membres[j], association=asso)
 
-        # Supprimer les nœuds isolés
+        # Remove isolated nodes
         isolated_nodes = list(nx.isolates(self.G))
         self.G.remove_nodes_from(isolated_nodes)
 
-        # Préparer la palette de couleurs
+        # Prepare the color palette
         palette_couleurs = [
             "#1f77b4", "#ff7f0e", "#2ca02c", "#d62728",
             "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22"
@@ -60,30 +60,30 @@ class StudentGraph:
         self.couleurs_assos = {a: palette_couleurs[i % len(palette_couleurs)]
                                for i, a in enumerate(self.associations_a_garder)}
 
-        # Déterminer la couleur et le hovertext de chaque nœud
+        # Determine the color and hover text for each node
         self.node_colors = []
         self.node_hovertext = []
         for node in self.G.nodes():
             assos = [a for a in self.df.loc[self.df[self.nom_colonne_eleve] == node, "liste_assos"].iloc[0]
                      if a in self.associations_a_garder]
             if len(assos) == 0:
-                couleur = "#cccccc"  # gris
+                couleur = "#cccccc"  # grey
             elif len(assos) == 1:
                 couleur = self.couleurs_assos[assos[0]]
             else:
-                couleur = "black"  # plusieurs associations
+                couleur = "black" 
             self.node_colors.append(couleur)
             self.node_hovertext.append(f"{node}<br>{' | '.join(assos)}")
 
     def get_graph(self):
         """
-        Retourne le graphe NetworkX construit.
+        Returns the constructed NetworkX graph.
         """
         return self.G
 
     def plot_graph(self, title=None):
         """
-        Affiche le graphe avec Plotly.
+        Plots the graph with Plotly.
         """
         if self.G.number_of_nodes() == 0:
             print("Aucun nœud à afficher.")
@@ -91,7 +91,7 @@ class StudentGraph:
 
         pos = nx.spring_layout(self.G, seed=42)
 
-        # Traces des arêtes
+        # Edge marks
         edge_x, edge_y = [], []
         for edge in self.G.edges():
             x0, y0 = pos[edge[0]]
@@ -106,7 +106,7 @@ class StudentGraph:
             mode='lines'
         )
 
-        # Traces des nœuds
+        # Traces of knots
         node_x, node_y = [], []
         for node in self.G.nodes():
             x, y = pos[node]
@@ -150,7 +150,7 @@ class StudentGraph:
             )
         )
 
-        # Ajouter la légende des couleurs
+        # Add color legend
         for asso, couleur in self.couleurs_assos.items():
             fig.add_trace(go.Scatter(
                 x=[None], y=[None],
