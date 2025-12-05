@@ -168,6 +168,7 @@ def get_members_of_association(studentgraph, association):
 
 def iterations_to_treshold(class_model, var_name, var_values, kargs, iter_per_value, max_step, threshold):
     results = {}
+    print("preuve nouveau commit")
     for var in tqdm(var_values, desc=f"Progress over {var_name}"):
         print(threshold)
         results[var] = []
