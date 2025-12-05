@@ -168,9 +168,7 @@ def get_members_of_association(studentgraph, association):
 
 def iterations_to_treshold(class_model, var_name, var_values, kargs, iter_per_value, max_step, threshold):
     results = {}
-    print("preuve nouveau commit")
     for var in tqdm(var_values, desc=f"Progress over {var_name}"):
-        print(threshold)
         results[var] = []
         all_args = {**{var_name: var}, **kargs}
         for _ in tqdm(range(iter_per_value), desc=f"  Iterations for {var_name}={var}", leave=False):
@@ -184,7 +182,6 @@ def iterations_to_treshold(class_model, var_name, var_values, kargs, iter_per_va
                 model.move()
                 m = model.magnetization * inv_size ** 2
                 if m > 2* threshold -1:
-                    print("Claire débeugue")
                     #threshold_reached = True
                     break
             results[var].append(step)
