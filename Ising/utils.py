@@ -174,14 +174,14 @@ def iterations_to_treshold(class_model, var_name, var_values, kargs, iter_per_va
         for _ in tqdm(range(iter_per_value), desc=f"  Iterations for {var_name}={var}", leave=False):
             model = class_model(**all_args)
             if var_name == 'h':
-                threshold = 4* np.pi / (var*model.size)**2
+                threshold = 2*(4* np.pi / (var*model.size)**2) -1
                 model._reset_spin(to_value=-1)
             #threshold_reached = False
             inv_size = 1.0 / model.size
             for step in range(max_step):
                 model.move()
                 m = model.magnetization * inv_size ** 2
-                if m > 2* threshold -1:
+                if m > threshold:
                     #threshold_reached = True
                     break
             results[var].append(step)
