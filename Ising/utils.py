@@ -166,7 +166,7 @@ def get_members_of_association(studentgraph, association):
         if association in row["liste_assos"]
     ]
 
-def iterations_to_treshold(class_model, var_name, var_values, kargs, iter_per_value, max_step, treshold):
+def iterations_to_treshold(class_model, var_name, var_values, kargs, iter_per_value, max_step, threshold):
     results = {}
     for var in tqdm(var_values, desc=f"Progress over {var_name}"):
         results[var] = []
@@ -181,7 +181,7 @@ def iterations_to_treshold(class_model, var_name, var_values, kargs, iter_per_va
             for step in range(max_step):
                 model.move()
                 m = model.magnetization * inv_size
-                if m > treshold:
+                if m > threshold:
                     #threshold_reached = True
                     break
             results[var].append(step)
