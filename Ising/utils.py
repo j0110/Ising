@@ -183,6 +183,7 @@ def iterations_to_treshold(class_model, var_name, var_values, kargs, iter_per_va
                 model.move()
                 m = model.magnetization * inv_size
                 if m > threshold:
+                    print("Claire débeugue")
                     #threshold_reached = True
                     break
             results[var].append(step)
