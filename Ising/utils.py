@@ -176,6 +176,10 @@ def iterations_to_treshold(class_model, var_name, var_values, kargs, iter_per_va
             if var_name == 'h':
                 threshold = 2*(4* np.pi / (var*model.size)**2) -1
                 model._reset_spin(to_value=-1)
+            if var_name =='T':
+                numerator = 2 - var * np.log(np.cosh(2/var) / np.sinh(2/var))
+                denominator = 0.4 * (1 - np.sinh(2/var)**(-4))**(1/8)
+                threshold = (np.pi / model.size**2) * (numerator / denominator)**2
             #threshold_reached = False
             inv_size = 1.0 / model.size
             for step in range(max_step):
