@@ -166,7 +166,7 @@ def get_members_of_association(studentgraph, association):
         if association in row["liste_assos"]
     ]
 
-def iterations_to_treshold(class_model, var_name, var_values, kargs, iter_per_value, max_step, threshold = None):
+def iterations_to_threshold(class_model, var_name, var_values, kargs, iter_per_value, max_step, threshold = None):
     results = {}
     for var in tqdm(var_values, desc=f"Progress over {var_name}"):
         results[var] = []

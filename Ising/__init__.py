@@ -7,7 +7,7 @@ from .utils import (compute_properties,
                     plot_properties,
                     compute_critical_exponents,
                     get_members_of_association,
-                    iterations_to_treshold)
+                    iterations_to_threshold)
 from .cachefile import CacheFile
 from .gifcache import GifCache  
 
@@ -21,7 +21,7 @@ __all__ = [
     "plot_properties",
     "compute_critical_exponents",
     "get_members_of_association",
-    "iterations_to_treshold",
+    "iterations_to_threshold",
     "CacheFile",
     "GifCache"
 ]
