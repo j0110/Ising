@@ -45,7 +45,12 @@ def compute_properties(model, var_name, var_value, n_warmup=1000, n_cycles=100, 
                 # Accumulate averages
                 m = model._get_magnetization()
                 e = model._get_energy()
-                av_m += np.abs(m)
+                if var_name == 'T':
+                    av_m += np.abs(m)
+                elif var_name == 'h':
+                    av_m += m
+                else:
+                    raise ValueError("var_name must be 'T' or 'h'")
                 av_m2 += m**2
                 av_e += e
                 av_e2 += e**2
