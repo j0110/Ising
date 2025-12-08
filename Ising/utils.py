@@ -166,17 +166,17 @@ def get_members_of_association(studentgraph, association):
         if association in row["liste_assos"]
     ]
 
-def iterations_to_treshold(class_model, var_name, var_values, kargs, iter_per_value, max_step, threshold):
+def iterations_to_treshold(class_model, var_name, var_values, kargs, iter_per_value, max_step, threshold = None):
     results = {}
     for var in tqdm(var_values, desc=f"Progress over {var_name}"):
         results[var] = []
         all_args = {**{var_name: var}, **kargs}
         for _ in tqdm(range(iter_per_value), desc=f"  Iterations for {var_name}={var}", leave=False):
             model = class_model(**all_args)
-            if var_name == 'h':
+            if var_name == 'h' and not threshold:
                 threshold = 2*(4* np.pi / (var*model.size)**2) -1
                 model._reset_spin(to_value=-1)
-            if var_name =='T':
+            if var_name =='T' and not threshold:
                 numerator = 2 - var * np.log(np.cosh(2/var) / np.sinh(2/var))
                 denominator = 0.4 * (1 - np.sinh(2/var)**(-4))**(1/8)
                 threshold = (np.pi / model.size**2) * (numerator / denominator)**2
