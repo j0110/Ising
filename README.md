@@ -1,3 +1,5 @@
+# Modeling Social Interactions with Ising Models
+
 A Python library implementing various Ising model simulations using **Monte Carlo methods**, including the **Metropolis** and **Wolff cluster algorithms** (used for efficient simulation near critical points).
 
 The core analysis covers four main areas:
