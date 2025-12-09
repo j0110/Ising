@@ -5,3 +5,11 @@ The core analysis covers four main areas:
 * **External Pressure ($H$):** Studies the effects of a global bias (analogous to external pressure) on the system, observing **nucleation points** and **hysteresis** phenomena.
 * **Geometrical Effects:** Extends the model to 3D lattices and complex topologies, including **non-oriented, oriented graphs** and a **multi-component (dual-layer) coupled Ising model**.
 * **Real Network Application:** Maps the model onto a **real student interaction network** to analyze **rumor propagation** and find physical properties like critical temperature and exponents for the specific graph structure.
+
+
+____________________________________________________________________________________________________________________________________________
+**How to use our code ?**
+- Open the file Ising.ipynb
+- Run all the cells
+
+Each cell will call the functions/data in the Github repository so it will quite fast to execute the entire notebook.
