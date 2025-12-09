@@ -8,8 +8,17 @@ The core analysis covers four main areas:
 
 
 ____________________________________________________________________________________________________________________________________________
-**How to use our code ?**
-- Open the file Ising.ipynb
-- Run all the cells
+**Quick Start: How to Use Our Code**
 
-Each cell will call the functions/data in the Github repository so it will quite fast to execute the entire notebook.
+Our entire analysis is packaged into a single, executable notebook.
+
+1.  **Clone the Repository (optional):**
+    ```bash
+    git clone [https://github.com/j0110/Ising.git](https://github.com/j0110/Ising.git)
+    cd Ising
+    ```
+2.  **Run the Analysis:**
+    * Open the file `Ising.ipynb` in **Jupyter Notebook** or **VS Code**.
+    * Select **Run All Cells**.
+
+> **Note:** The notebook is designed to call functions and load data from the repository's files, making the execution of the entire analysis fast and self-contained.
